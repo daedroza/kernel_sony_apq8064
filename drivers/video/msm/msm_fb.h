@@ -52,10 +52,16 @@
 #define MFD_KEY  0x11161126
 #define MSM_FB_MAX_DEV_LIST 32
 
+enum {
+	MDP_PANEL_POWER_OFF = 0,
+	MDP_PANEL_POWER_ON,
+	MDP_PANEL_POWER_DOZE,
+};
+
 struct disp_info_type_suspend {
 	boolean op_enable;
 	boolean sw_refreshing_enable;
-	boolean panel_power_on;
+	int panel_power_state;
 	boolean op_suspend;
 };
 
@@ -112,7 +118,7 @@ struct msm_fb_data_type {
 
 	struct hrtimer dma_hrtimer;
 
-	boolean panel_power_on;
+	int panel_power_state;
 	struct work_struct dma_update_worker;
 	struct semaphore sem;
 
